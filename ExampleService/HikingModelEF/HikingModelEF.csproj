@@ -53,6 +53,7 @@
     <Compile Include="Challenge.cs">
       <DependentUpon>HikerDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\ReflectionHelper.cs" />
     <Compile Include="Dto\ChallengeDto.cs">
       <DependentUpon>HikeDbDto.tt</DependentUpon>
     </Compile>
@@ -70,6 +71,7 @@
     <Compile Include="Dto\TripDto.cs">
       <DependentUpon>HikeDbDto.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EntityHelpers.cs" />
     <Compile Include="Hiker.cs">
       <DependentUpon>HikerDb.tt</DependentUpon>
     </Compile>

@@ -30,6 +30,20 @@ namespace HikingService.Controllers
         }
 
 
+        [HttpDelete]
+        [Route()]
+        public IHttpActionResult Delete(long id)
+        {
+            using (HikerDbEntities ctx = new HikerDbEntities())
+            {
+                var hiker = ctx.Hiker.Find(id);
+                ctx.Hiker.Remove(hiker);
+                ctx.SaveChanges();
+
+                return Ok();
+            }
+        }
+
         [HttpPost]
         [Route()]
         [ResponseType(typeof(Hiker))]
