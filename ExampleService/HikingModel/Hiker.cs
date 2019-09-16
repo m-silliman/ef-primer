@@ -13,6 +13,5 @@ namespace HikingDataModel
         public string TrailName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Experience { get; set; }
-        public bool AdkMember { get; set; }
     }
 }

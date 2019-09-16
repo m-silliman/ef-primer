@@ -16,7 +16,6 @@ namespace HikingDataModel
         public long Id { get; set; }
         public string Name { get; set; }
         public bool HasPatch { get;set;}
-
         public List<Mountain> Mountains { get; set; }
     }
 }

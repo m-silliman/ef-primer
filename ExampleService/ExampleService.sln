@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikingService", "HikingServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikingModel", "HikingModel\HikingModel.csproj", "{57AF691E-645D-46FE-BE41-6F08EB1B6880}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikingModelEF", "HikingModelEF\HikingModelEF.csproj", "{F78C6830-B764-4D88-9E25-2F0F1D9FC474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HikerDb.SchemaBuilder", "HikerDb.SchemaBuilder\HikerDb.SchemaBuilder.csproj", "{1D787A12-266A-4579-B1AB-3A257C67FBF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{57AF691E-645D-46FE-BE41-6F08EB1B6880}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57AF691E-645D-46FE-BE41-6F08EB1B6880}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57AF691E-645D-46FE-BE41-6F08EB1B6880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78C6830-B764-4D88-9E25-2F0F1D9FC474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78C6830-B764-4D88-9E25-2F0F1D9FC474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78C6830-B764-4D88-9E25-2F0F1D9FC474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78C6830-B764-4D88-9E25-2F0F1D9FC474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D787A12-266A-4579-B1AB-3A257C67FBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D787A12-266A-4579-B1AB-3A257C67FBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D787A12-266A-4579-B1AB-3A257C67FBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D787A12-266A-4579-B1AB-3A257C67FBF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,7 +23,13 @@ namespace HikingService
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.Formatters.Clear();
-            config.Formatters.Add(new JsonMediaTypeFormatter());
+            JsonMediaTypeFormatter json = new JsonMediaTypeFormatter();
+            json.SerializerSettings = new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            };
+            config.Formatters.Add(json);
+            //config.Formatters.Add(new JsonMediaTypeFormatter());
             app.UseWebApi(config);
 
 

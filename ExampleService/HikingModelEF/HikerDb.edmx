@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HikerDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Challenge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="HasPatch" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hiker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TrailName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Experience" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mountain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Elevation" Type="bigint" Nullable="false" />
+          <Property Name="Distance" Type="float" Nullable="false" />
+          <Property Name="ElevationGain" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MountainChallenge">
+          <Key>
+            <PropertyRef Name="MountainId" />
+            <PropertyRef Name="ChallengeId" />
+          </Key>
+          <Property Name="MountainId" Type="bigint" Nullable="false" />
+          <Property Name="ChallengeId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HikerId" Type="bigint" Nullable="false" />
+          <Property Name="MountainId" Type="bigint" Nullable="false" />
+          <Property Name="TripDate" Type="date" Nullable="false" />
+          <Property Name="Conditions" Type="bigint" Nullable="false" />
+          <Property Name="Report" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_MountainChallenge2Challenge">
+          <End Role="Challenge" Type="Self.Challenge" Multiplicity="1" />
+          <End Role="MountainChallenge" Type="Self.MountainChallenge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Challenge">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MountainChallenge">
+              <PropertyRef Name="ChallengeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MountainChallenge2Mountain">
+          <End Role="Mountain" Type="Self.Mountain" Multiplicity="1" />
+          <End Role="MountainChallenge" Type="Self.MountainChallenge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mountain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MountainChallenge">
+              <PropertyRef Name="MountainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip2Hiker">
+          <End Role="Hiker" Type="Self.Hiker" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="HikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip2Mountain">
+          <End Role="Mountain" Type="Self.Mountain" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mountain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="MountainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HikerDbModelStoreContainer">
+          <EntitySet Name="Challenge" EntityType="Self.Challenge" Schema="HIKE" store:Type="Tables" />
+          <EntitySet Name="Hiker" EntityType="Self.Hiker" Schema="HIKE" store:Type="Tables" />
+          <EntitySet Name="Mountain" EntityType="Self.Mountain" Schema="HIKE" store:Type="Tables" />
+          <EntitySet Name="MountainChallenge" EntityType="Self.MountainChallenge" Schema="HIKE" store:Type="Tables" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" Schema="HIKE" store:Type="Tables" />
+          <AssociationSet Name="FK_MountainChallenge2Challenge" Association="Self.FK_MountainChallenge2Challenge">
+            <End Role="Challenge" EntitySet="Challenge" />
+            <End Role="MountainChallenge" EntitySet="MountainChallenge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MountainChallenge2Mountain" Association="Self.FK_MountainChallenge2Mountain">
+            <End Role="Mountain" EntitySet="Mountain" />
+            <End Role="MountainChallenge" EntitySet="MountainChallenge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip2Hiker" Association="Self.FK_Trip2Hiker">
+            <End Role="Hiker" EntitySet="Hiker" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip2Mountain" Association="Self.FK_Trip2Mountain">
+            <End Role="Mountain" EntitySet="Mountain" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HikerDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Challenge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HasPatch" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Mountain" Relationship="Self.MountainChallenge" FromRole="Challenge" ToRole="Mountain" />
+        </EntityType>
+        <EntityType Name="Hiker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrailName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Experience" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_Trip2Hiker" FromRole="Hiker" ToRole="Trip" />
+        </EntityType>
+        <EntityType Name="Mountain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Elevation" Type="Int64" Nullable="false" />
+          <Property Name="Distance" Type="Double" Nullable="false" />
+          <Property Name="ElevationGain" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_Trip2Mountain" FromRole="Mountain" ToRole="Trip" />
+          <NavigationProperty Name="Challenge" Relationship="Self.MountainChallenge" FromRole="Mountain" ToRole="Challenge" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HikerId" Type="Int64" Nullable="false" />
+          <Property Name="MountainId" Type="Int64" Nullable="false" />
+          <Property Name="TripDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Conditions" Type="Int64" Nullable="false" />
+          <Property Name="Report" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hiker" Relationship="Self.FK_Trip2Hiker" FromRole="Trip" ToRole="Hiker" />
+          <NavigationProperty Name="Mountain" Relationship="Self.FK_Trip2Mountain" FromRole="Trip" ToRole="Mountain" />
+        </EntityType>
+        <Association Name="FK_Trip2Hiker">
+          <End Role="Hiker" Type="Self.Hiker" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hiker">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="HikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip2Mountain">
+          <End Role="Mountain" Type="Self.Mountain" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mountain">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="MountainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MountainChallenge">
+          <End Role="Challenge" Type="Self.Challenge" Multiplicity="*" />
+          <End Role="Mountain" Type="Self.Mountain" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="HikerDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Challenge" EntityType="Self.Challenge" />
+          <EntitySet Name="Hiker" EntityType="Self.Hiker" />
+          <EntitySet Name="Mountain" EntityType="Self.Mountain" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" />
+          <AssociationSet Name="FK_Trip2Hiker" Association="Self.FK_Trip2Hiker">
+            <End Role="Hiker" EntitySet="Hiker" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip2Mountain" Association="Self.FK_Trip2Mountain">
+            <End Role="Mountain" EntitySet="Mountain" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="MountainChallenge" Association="Self.MountainChallenge">
+            <End Role="Challenge" EntitySet="Challenge" />
+            <End Role="Mountain" EntitySet="Mountain" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HikerDbModelStoreContainer" CdmEntityContainer="HikerDbEntities">
+          <EntitySetMapping Name="Challenge">
+            <EntityTypeMapping TypeName="HikerDbModel.Challenge">
+              <MappingFragment StoreEntitySet="Challenge">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HasPatch" ColumnName="HasPatch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hiker">
+            <EntityTypeMapping TypeName="HikerDbModel.Hiker">
+              <MappingFragment StoreEntitySet="Hiker">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TrailName" ColumnName="TrailName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mountain">
+            <EntityTypeMapping TypeName="HikerDbModel.Mountain">
+              <MappingFragment StoreEntitySet="Mountain">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Elevation" ColumnName="Elevation" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="ElevationGain" ColumnName="ElevationGain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trip">
+            <EntityTypeMapping TypeName="HikerDbModel.Trip">
+              <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HikerId" ColumnName="HikerId" />
+                <ScalarProperty Name="MountainId" ColumnName="MountainId" />
+                <ScalarProperty Name="TripDate" ColumnName="TripDate" />
+                <ScalarProperty Name="Conditions" ColumnName="Conditions" />
+                <ScalarProperty Name="Report" ColumnName="Report" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MountainChallenge" TypeName="HikerDbModel.MountainChallenge" StoreEntitySet="MountainChallenge">
+            <EndProperty Name="Challenge">
+              <ScalarProperty Name="Id" ColumnName="ChallengeId" />
+            </EndProperty>
+            <EndProperty Name="Mountain">
+              <ScalarProperty Name="Id" ColumnName="MountainId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
