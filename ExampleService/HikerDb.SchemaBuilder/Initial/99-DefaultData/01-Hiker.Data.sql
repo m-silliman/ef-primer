@@ -3,7 +3,7 @@
 INSERT INTO [HIKE].[Hiker] ([Id],[Name],[TrailName],[DateOfBirth],[Experience])
 VALUES (1, 'Rose', 'Sasquatch', '10/2/1980',  10);
 INSERT INTO [HIKE].[Hiker] ([Id],[Name],[TrailName],[DateOfBirth],[Experience])
-VALUES (2, 'Decker', 'Sasquatch', '10/2/1980',  8);
+VALUES (2, 'Decker', 'Bear Bait', '10/2/1980',  8);
 INSERT INTO [HIKE].[Hiker] ([Id],[Name],[TrailName],[DateOfBirth],[Experience])
 VALUES (3, 'Silliman', 'Silly', '10/2/1980',  5);
 INSERT INTO [HIKE].[Hiker] ([Id],[Name],[TrailName],[DateOfBirth],[Experience])
